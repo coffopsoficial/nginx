@@ -1,5 +1,5 @@
 ---
-- name: Instalando Pacotes para Ngnix
+- name: Instalando Pacotes para Nginx
   apt:
     name:
       - curl
@@ -14,7 +14,7 @@
     src: templates/nginx.list.j2
     dest: /etc/apt/sources.list.d/nginx.list
 
-- name: Importando chave do Ngnix
+- name: Importando chave do Nginx
   shell: curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor | sudo tee /usr/share/keyrings/nginx-archive-keyring.gpg >/dev/null
 
 - name: Instalando Nginx

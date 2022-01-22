@@ -1,0 +1,15 @@
+---
+- name: Instalando Pacotes para Nginx
+  yum:
+    name: yum-utils
+    state: latest
+
+- name: Copiando template nginx.repo para /etc/yum.repos.d/
+  template:
+    src: templates/nginx.repo.j2
+    dest: /etc/yum.repos.d/nginx.repo
+
+- name: Instalando Nginx
+  yum:
+    name: nginx
+    state: latest
