@@ -1,0 +1,25 @@
+---
+- name: Instalando Pacotes para Ngnix
+  apt:
+    name:
+      - curl
+      - gnupg2
+      - ca-certificates
+      - lsb-release
+      - certbot
+      - python3-certbot-nginx
+
+- name: Copiando template nginx.list para APT
+  template:
+    src: templates/nginx.list.j2
+    dest: /etc/apt/sources.list.d/nginx.list
+
+- name: Importando chave do Ngnix
+  shell: curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor | sudo tee /usr/share/keyrings/nginx-archive-keyring.gpg >/dev/null
+
+- name: Instalando Nginx
+  apt:
+    name: nginx
+    state: latest
+    update_cache: yes
+
